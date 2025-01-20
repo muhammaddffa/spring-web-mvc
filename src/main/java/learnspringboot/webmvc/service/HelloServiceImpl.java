@@ -8,9 +8,9 @@ public class HelloServiceImpl implements HelloService{
     @Override
     public String hello(String name){
         if(name == null){
-            return "Hello World";
+            return "Hello Guest";
         }else {
-            return "Hello : " + name;
+            return "Hello " + name;
         }
     }
 }

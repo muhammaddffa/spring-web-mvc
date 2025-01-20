@@ -1,4 +1,4 @@
-package learnspringboot.webmvc;
+package learnspringboot.webmvc.controller;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;

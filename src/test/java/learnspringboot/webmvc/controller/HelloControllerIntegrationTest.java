@@ -1,4 +1,4 @@
-package learnspringboot.webmvc;
+package learnspringboot.webmvc.controller;
 
 
 import org.junit.jupiter.api.Assertions;
