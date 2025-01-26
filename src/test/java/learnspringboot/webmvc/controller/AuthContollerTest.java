@@ -1,6 +1,7 @@
 package learnspringboot.webmvc.controller;
 
 
+import jakarta.servlet.http.Cookie;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,8 @@ public class AuthContollerTest {
                         .param("password", "rahasia")
         ).andExpectAll(
                 status().isOk(),
-                content().string(Matchers.containsString("OK"))
+                content().string(Matchers.containsString("OK")),
+                cookie().value("username", Matchers.is("dade"))
         );
     }
 
@@ -45,6 +47,17 @@ public class AuthContollerTest {
         ).andExpectAll(
                 status().isUnauthorized(),
                 content().string(Matchers.containsString("KO"))
+        );
+    }
+
+    @Test
+    void getUser() throws Exception {
+        mockMvc.perform(
+                get("/auth/user")
+                        .cookie(new Cookie("username", "dade"))
+        ).andExpectAll(
+                status().isOk(),
+                content().string(Matchers.containsString("Hello dade"))
         );
     }
 }
