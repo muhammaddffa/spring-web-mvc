@@ -46,4 +46,28 @@ public class PersonControllerTest {
                         "with email dade@example.com with phone 081238200 with address " + "Pahlawan, Bandung, Indonesia, 1111"))
         );
     }
+
+    @Test
+    void createPersonInvalid() throws Exception {
+        mockMvc.perform(
+                post("/person")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("middleName", "Jack")
+                        .param("lastName", "Puki")
+                        .param("email", "dade@example.com")
+                        .param("phone", "081238200")
+                        .param("address.street", "Pahlawan")
+                        .param("address.city", "Bandung")
+                        .param("address.country", "Indonesia")
+                        .param("address.postalCode", "1111")
+                        .param("hobbies[0]", "Coding") // List dengan tipe data primitive seperti String, Integer, dan sejenisnya
+                        .param("hobbies[1]", "Reading")
+                        .param("hobbies[2]", "Cooking")
+                        .param("socialMedias[0].name", "Facebook") // Untuk List dengan tipe data object
+                        .param("socialMedias[0].location", "facebook.com/muhammaddaffa")
+        ).andExpectAll(
+                status().isBadRequest()
+        );
+    }
+
 }

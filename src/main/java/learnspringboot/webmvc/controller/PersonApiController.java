@@ -1,5 +1,6 @@
 package learnspringboot.webmvc.controller;
 
+import jakarta.validation.Valid;
 import learnspringboot.webmvc.model.CreatePersonRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,7 @@ public class PersonApiController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public CreatePersonRequest createPerson(@RequestBody CreatePersonRequest request) {
+    public CreatePersonRequest createPerson(@RequestBody @Valid CreatePersonRequest request) {
         return request;
     }
 }
