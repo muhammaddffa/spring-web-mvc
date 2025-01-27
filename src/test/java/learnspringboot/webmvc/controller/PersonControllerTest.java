@@ -35,10 +35,10 @@ public class PersonControllerTest {
                         .param("address.city", "Bandung")
                         .param("address.country", "Indonesia")
                         .param("address.postalCode", "1111")
-                        .param("hobbies[0]", "Coding")
+                        .param("hobbies[0]", "Coding") // List dengan tipe data primitive seperti String, Integer, dan sejenisnya
                         .param("hobbies[1]", "Reading")
                         .param("hobbies[2]", "Cooking")
-                        .param("socialMedias[0].name", "Facebook")
+                        .param("socialMedias[0].name", "Facebook") // Untuk List dengan tipe data object
                         .param("socialMedias[0].location", "facebook.com/muhammaddaffa")
         ).andExpectAll(
                 status().isOk(),
