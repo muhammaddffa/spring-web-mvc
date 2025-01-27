@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import learnspringboot.webmvc.model.CreatePersonRequest;
 import learnspringboot.webmvc.model.CreateSosialMediaRequest;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -78,7 +79,8 @@ public class PersonApiControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .content(jsonRequest)
         ).andExpectAll(
-                status().isBadRequest()
+                status().isBadRequest(),
+                content().string(Matchers.containsString("Validation Error"))
         );
 
     }

@@ -66,7 +66,8 @@ public class PersonControllerTest {
                         .param("socialMedias[0].name", "Facebook") // Untuk List dengan tipe data object
                         .param("socialMedias[0].location", "facebook.com/muhammaddaffa")
         ).andExpectAll(
-                status().isBadRequest()
+                status().isBadRequest(),
+                content().string(Matchers.containsString("Validation Error"))
         );
     }
 
