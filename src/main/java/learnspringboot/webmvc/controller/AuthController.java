@@ -4,6 +4,8 @@ package learnspringboot.webmvc.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import learnspringboot.webmvc.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +22,20 @@ public class AuthController {
     public ResponseEntity<String> login(
             @RequestParam(name = "username") String username,
             @RequestParam(name = "password") String password,
+            HttpServletRequest servletRequest,
             HttpServletResponse servletResponse
     ) {
 
 
         if ("dade".equals(username) && "rahasia".equals(password)) {
+
+            //Session
+            //Managament Session (menggunakan Httpservletrequest)
+            HttpSession session = servletRequest.getSession(true);
+            session.setAttribute("user", new User(username));
+
+
+            //cookie
             Cookie cookie = new Cookie("username", username);
             cookie.setPath("/");
             servletResponse.addCookie(cookie);
