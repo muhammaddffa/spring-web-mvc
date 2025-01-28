@@ -1,6 +1,5 @@
 package learnspringboot.webmvc.controller;
 
-import learnspringboot.webmvc.model.User;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,28 +15,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerTest {
+public class PartnerControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void getUser() throws Exception {
+    public void getPartner() throws Exception {
         mockMvc.perform(
-                get("/user/current")
-                        .sessionAttr("user", new User("dade"))
+                get("/partner/current")
+                        .header("X-API-KEY", "SAMPLE")
         ).andExpectAll(
                 status().isOk(),
-                content().string(Matchers.containsString("Hello dade"))
+                content().string(Matchers.containsString("SAMPLE : Sample Partner"))
         );
     }
 
     @Test
-    void getUserInvalid() throws Exception {
+    public void getPartnerError() throws Exception {
         mockMvc.perform(
-                get("/user/current")
+                get("/partner/current")
         ).andExpectAll(
-                status().is3xxRedirection()
+                status().isInternalServerError()
         );
     }
 }
