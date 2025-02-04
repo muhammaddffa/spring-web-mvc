@@ -40,7 +40,6 @@ public class RestTemplateTest {
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertEquals("Belajar Spring WebMVC", response.getBody().get(0));
-
     }
 
     @Test
